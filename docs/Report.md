@@ -21,7 +21,7 @@
 * 14 не успешных – что составляет 37 %
 
 #### Подготовлены отчёты:
-https://github.com/SonKe1/DiplomQA/blob/main/docs/Screenshot_2.png
+(https://github.com/SonKe1/DiplomQA/blob/main/docs/Screenshot_2.png)
 
 ### Общие рекомендации
 * Устранить выявленные баги. Указаны в issue;
