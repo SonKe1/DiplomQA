@@ -1,7 +1,7 @@
 package ru.netology.page;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.netology.data.Card;
+import ru.netology.data.CardInfo;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -30,12 +30,12 @@ public class CreditGate {
         heading.shouldBe(visible);
     }
 
-    public void inputData(Card card) {
-        cardNumberField.setValue(card.getCardNumber());
-        monthField.setValue(card.getMonth());
-        yearField.setValue(card.getYear());
-        cardHolderField.setValue(card.getCardHolder());
-        cvvField.setValue(card.getCvv());
+    public void inputData(CardInfo cardInfo) {
+        cardNumberField.setValue(cardInfo.getCardNumber());
+        monthField.setValue(cardInfo.getMonth());
+        yearField.setValue(cardInfo.getYear());
+        cardHolderField.setValue(cardInfo.getCardHolder());
+        cvvField.setValue(cardInfo.getCvv());
         continueButton.click();
     }
 

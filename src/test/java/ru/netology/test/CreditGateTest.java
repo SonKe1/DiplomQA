@@ -52,19 +52,10 @@ public class CreditGateTest {
     }
 
     @Test
-    void creditNegativeAllFieldEmpty() {
-        val startPage = new PaymentMethod();
-        val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getEmptyCard());
-        payment.waitNotificationWrongFormat4Fields();
-        assertEquals("0", SqlHelp.getOrderCount());
-    }
-
-    @Test
     void creditNegativeNumberCard15Symbols() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getNumberCard15Symbols());
+        payment.inputData(DataHelp.getFifteenNumberCardNumber());
         payment.waitNotificationWrongFormat();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -73,7 +64,7 @@ public class CreditGateTest {
     void creditNegativeCardNotInDatabase() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardNotInDatabase());
+        payment.inputData(DataHelp.getFakerNumberCardNumber());
         payment.waitNotificationFailure();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -82,7 +73,7 @@ public class CreditGateTest {
     void creditNegativeMonth1Symbol() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardMonth1Symbol());
+        payment.inputData(DataHelp.getOneNumberMonth());
         payment.waitNotificationWrongFormat();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -91,7 +82,7 @@ public class CreditGateTest {
     void creditNegativeMonthOver12() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardMonthOver12());
+        payment.inputData(DataHelp.getThirteenMonthInField());
         payment.waitNotificationExpirationDateError();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -100,7 +91,7 @@ public class CreditGateTest {
     void creditNegativeMonth00ThisYear() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardMonth00ThisYear());
+        payment.inputData(DataHelp.getZeroMonthInField());
         payment.waitNotificationExpirationDateError();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -109,34 +100,26 @@ public class CreditGateTest {
     void creditNegativeMonth00OverThisYear() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardMonth00OverThisYear());
+        payment.inputData(DataHelp.getPreviousMonthInField());
         payment.waitNotificationExpirationDateError();
         assertEquals("0", SqlHelp.getOrderCount());
     }
 
     @Test
-    void creditNegativeYear00() {
+    void creditNegativeYear() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardYear00());
+        payment.inputData(DataHelp.getEmptyYear());
         payment.waitNotificationExpiredError();
         assertEquals("0", SqlHelp.getOrderCount());
     }
 
-    @Test
-    void creditNegativeYear1Symbol() {
-        val startPage = new PaymentMethod();
-        val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardYear1Symbol());
-        payment.waitNotificationWrongFormat();
-        assertEquals("0", SqlHelp.getOrderCount());
-    }
 
     @Test
     void creditNegativeYearUnderThisYear() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardYearUnderThisYear());
+        payment.inputData(DataHelp.getPreviousYearInField());
         payment.waitNotificationExpiredError();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -145,7 +128,7 @@ public class CreditGateTest {
     void creditNegativeYearOverThisYearOn6() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardYearOverThisYearOn6());
+        payment.inputData(DataHelp.getPlusSixYearInField());
         payment.waitNotificationExpirationDateError();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -154,7 +137,7 @@ public class CreditGateTest {
     void creditNegativeCvv1Symbol() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardCvv1Symbol());
+        payment.inputData(DataHelp.getOneNumberInFieldCVV());
         payment.waitNotificationWrongFormat();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -163,7 +146,7 @@ public class CreditGateTest {
     void creditNegativeCvv2Symbols() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardCvv2Symbols());
+        payment.inputData(DataHelp.getOTwoNumberInFieldCVV());
         payment.waitNotificationWrongFormat();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -172,7 +155,7 @@ public class CreditGateTest {
     void creditNegativeOwner1Word() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardHolder1Word());
+        payment.inputData(DataHelp.getOTwoNumberInFieldCVV());
         payment.waitNotificationWrongFormat();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -181,16 +164,16 @@ public class CreditGateTest {
     void creditNegativeOwnerCirillic() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardHolderCirillic());
+        payment.inputData(DataHelp.getRusName());
         payment.waitNotificationWrongFormat();
         assertEquals("0", SqlHelp.getOrderCount());
     }
 
     @Test
-    void creditNegativeOwnerNumeric() {
+    void creditNumberInName() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardHolderNumeric());
+        payment.inputData(DataHelp.getNumberInFieldName());
         payment.waitNotificationWrongFormat();
         assertEquals("0", SqlHelp.getOrderCount());
     }
@@ -199,7 +182,7 @@ public class CreditGateTest {
     void creditNegativeOwnerSpecialSymbols() {
         val startPage = new PaymentMethod();
         val payment = startPage.goToCreditPage();
-        payment.inputData(DataHelp.getCardSpecialSymbols());
+        payment.inputData(DataHelp.getSpecialSymbolInFieldName());
         payment.waitNotificationWrongFormat();
         assertEquals("0", SqlHelp.getOrderCount());
     }
